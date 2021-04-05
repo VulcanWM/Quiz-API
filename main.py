@@ -36,7 +36,13 @@ questions = [
     "Topic": "Geography",
     "Question": "Fort Knox lies in which American state?",
     "Answer": "Kentucky",
-    "Difficulty": "3/5"}
+    "Difficulty": "3/5"},
+  {
+    "Topic": "History",
+    "Question": "Who was Queen for just nine days in 1553?",
+    "Answer": "Lady Jane Grey",
+    "Difficulty": "2/5"
+  }
 ]
 
 @app.route('/', methods=['GET'])
