@@ -4,7 +4,9 @@ import random
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-topics = ["art-literature", "general-knowledge", "geography", "history", "music", "science-nature", "sport", "tie-break", "tv-films", "all"]
+topics = ["art-literature", "general-knowledge", "geography", "history", "music", "science-nature", "sport", "tv-films", "all"]
+
+diffs = ["1", "2", "3", "4", "5"]
 
 questions = [
   {
@@ -101,8 +103,37 @@ questions = [
     "Topic": "history",
     "Question": "Who established the First Lady position in the U.S.?",
     "Answer": "dolley madison",
-    "Difficulty": "4/5"
-  }
+    "Difficulty": "4/5"},
+  {
+    "Topic": "tv-films",
+    "Question": "What is the 5th song in the musical Hamilton?",
+    "Answer": "the schuyler sisters",
+    "Difficulty": "4/5"},
+  {
+    "Topic": "music",
+    "Question": "Which Beatle led the way across the zebra crossing on the Abbey Road album cover?",
+    "Answer": "john lennon",
+    "Difficulty": "4/5"},
+  {
+    "Topic": "science-nature",
+    "Question": "How many wings does a bee have?",
+    "Answer": "four",
+    "Difficulty": "4/5"},
+  {
+    "Topic": "science-nature",
+    "Question": "Which Apollo moon mission was the first to carry a lunar rover vehicle?",
+    "Answer": "apollo 15",
+    "Difficulty": "5/5"},
+  {
+    "Topic": "sport",
+    "Question": "Who won the 2009 Rugby World Sevens Cup?",
+    "Answer": "wales",
+    "Difficulty": "4/5"},
+  {
+    "Topic": "sport",
+    "Question": "How many rounds are there in an Olympic boxing match?",
+    "Answer": "four",
+    "Difficulty": "3/5"}
 ]
 
 @app.route('/', methods=['GET'])
@@ -150,6 +181,46 @@ def api_randomnum(topic, num:int):
           results.append(question)
   if int(num) > len(results):
     return f"There are only {len(results)} questions in the {topic} topic!"
+  end = []
+  for i in range(int(num)):
+    result = random.choice(results)
+    end.append(result)
+    index = results.index(result)
+    del results[index]
+  return jsonify(end)
+
+@app.route('/api/allquestionsdif/<diff>', methods=['GET'])
+def apidif_all(diff):
+  if diff not in diffs:
+    return "This is not a difficulty level name!"
+  results = []
+  for question in questions:
+      if question['Difficulty'].split("/")[0] == diff:
+          results.append(question)
+  return jsonify(results)
+
+
+@app.route('/api/randomdif/<diff>', methods=['GET'])
+def apidif_random(diff):
+  if diff not in diffs:
+    return "This is not a difficulty level name!"
+  results = []
+  for question in questions:
+      if question['Difficulty'].split("/")[0] == diff:
+          results.append(question)
+  result = random.choice(results)
+  return jsonify(result)
+
+@app.route('/api/randomnumdif/<diff>/<num>', methods=['GET'])
+def apidif_randomnum(diff, num):
+  if diff not in diffs:
+    return "This is not a difficulty level name!"
+  results = []
+  for question in questions:
+      if question['Difficulty'].split("/")[0] == diff:
+          results.append(question)
+  if int(num) > len(results):
+    return f"There are only {len(results)} questions in the {num} difficulty!"
   end = []
   for i in range(int(num)):
     result = random.choice(results)
