@@ -27,3 +27,8 @@ import requests
 response = requests.get("https://api.vulcanwm.repl.co/api/randomnum/<topic_name>/<num>")
 print(response.json())
 ```
+
+If you get an error in any of those, do the code below which will print the error if you are doing something wrong (response exists)
+```py
+print(reponse.content)
+```
