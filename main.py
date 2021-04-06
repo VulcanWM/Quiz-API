@@ -2,6 +2,7 @@ import flask
 from flask import request, jsonify, render_template
 import random
 import json
+import uuid
 f = open('questions.json')
 questions = json.load(f)
 app = flask.Flask(__name__)
@@ -21,7 +22,7 @@ def addquestion():
 @app.route("/addquestion", methods=["POST", "GET"])
 def addquestionfunc():
   if request.method == "POST":
-    theques = {"Topic": request.form['topic'], "Question": request.form['question'], "Answer": request.form['answer'], "Difficulty": request.form['difficulty']}
+    theques = {"id": str(uuid.uuid4()), "Topic": request.form['topic'], "Question": request.form['question'], "Answer": request.form['answer'], "Difficulty": request.form['difficulty']}
     thef = open('wait.json')
     wait = json.load(thef)
     wait.append(theques)
