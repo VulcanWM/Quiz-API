@@ -1,4 +1,5 @@
 import flask
+import os
 from flask import request, jsonify, render_template
 import random
 import json
@@ -32,6 +33,9 @@ def addquestionfunc():
     outfile.close()
     return "Question waiting to be verified!"
 
+@app.route("/api/all")
+def all():
+  return jsonify(questions)
 
 @app.route('/api/allquestions/<topic>', methods=['GET'])
 def api_all(topic):
@@ -120,5 +124,40 @@ def apidif_randomnum(diff, num):
     index = results.index(result)
     del results[index]
   return jsonify(end)
+
+@app.route("/verifywait")
+def verifywait():
+  return render_template("verifywait.html")
+
+@app.route("/verifywait", methods=["POST", "GET"])
+def verifywaitfunc():
+  if request.method == "POST":
+    if request.form['password'] == os.getenv("password"):
+      waitfile = open("wait.json")
+      wait = json.load(waitfile)
+      wait2 = []
+      for verify in wait:
+        if verify['id'] == request.form['id']:
+          for i in wait:
+            if i['id'] != request.form['id']:
+              wait2.append(i)
+          with open('wait.json', 'w') as outfile:
+            json.dump(wait2, outfile)
+          outfile.close()
+          if request.form['a/d'] == "a":
+            question = verify
+            del verify['id']
+            questions.append(question)
+            with open('questions.json', 'w') as outfile:
+              json.dump(questions, outfile)
+            outfile.close()
+            return "Accepted question and added it to the questions!"
+      
+          else:
+            return "Denied question"
+            
+    else:
+      return "Wrong password!"
+
 
 app.run(host='0.0.0.0', port=8080)
