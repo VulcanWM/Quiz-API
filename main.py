@@ -1,10 +1,11 @@
 import flask
 from flask import request, jsonify, render_template
 import random
-from questions import questions
+import json
+f = open('questions.json',)
+questions = json.load(f)
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-
 topics = ["art-literature", "general-knowledge", "geography", "history", "music", "science-nature", "sport", "tv-films", "all"]
 
 diffs = ["1", "2", "3", "4", "5"]
