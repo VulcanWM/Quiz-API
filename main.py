@@ -2,7 +2,7 @@ import flask
 from flask import request, jsonify, render_template
 import random
 import json
-f = open('questions.json',)
+f = open('questions.json')
 questions = json.load(f)
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -13,6 +13,23 @@ diffs = ["1", "2", "3", "4", "5"]
 @app.route('/', methods=['GET'])
 def home():
     return "Quiz API"
+
+@app.route("/addquestion")
+def addquestion():
+  return render_template("addquestion.html")
+
+@app.route("/addquestion", methods=["POST", "GET"])
+def addquestionfunc():
+  if request.method == "POST":
+    theques = {"Topic": request.form['topic'], "Question": request.form['question'], "Answer": request.form['answer'], "Difficulty": request.form['difficulty']}
+    thef = open('wait.json')
+    wait = json.load(thef)
+    wait.append(theques)
+    thef.close()
+    with open('wait.json', 'w') as outfile:
+      json.dump(wait, outfile)
+    outfile.close()
+    return "Question waiting to be verified!"
 
 
 @app.route('/api/allquestions/<topic>', methods=['GET'])
