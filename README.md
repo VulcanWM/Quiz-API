@@ -7,4 +7,4 @@ The difficulties in this API are 1, 2, 3, 4 and 5
 
 Remember when inserting the topic name or number, don't include the <>, eg. when you want the topic tv-films, do tv-films not <tv-films>.
 
-The ways to use this API in Python is [here](python file link in github).
+The ways to use this API in Python is [here](https://github.com/VulcanWM/Quiz-API/blob/API/APILANG/python.md).
