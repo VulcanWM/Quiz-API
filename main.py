@@ -2,6 +2,7 @@ import flask
 from flask import request, jsonify, render_template
 import random
 from questions import questions
+from gevent.pywsgi import WSGIServer
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -102,4 +103,4 @@ def apidif_randomnum(diff, num):
     del results[index]
   return jsonify(end)
 
-app.run(host='0.0.0.0', port=8080)
+WSGIServer(('0.0.0.0', 8080), app).serve_forever()
