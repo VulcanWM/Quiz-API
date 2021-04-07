@@ -10,3 +10,5 @@ Remember when inserting the topic name or number, don't include the <>, eg. when
 The ways to use this API in Python is [here](https://github.com/VulcanWM/Quiz-API/blob/API/APILANG/python.md).
 
 The ways to use this API in NodeJS is [here](https://github.com/VulcanWM/Quiz-API/blob/API/APILANG/nodejs.md)
+
+If you want to help add more questions then go [here](https://quizapi.vulcanwm.com/addquestion) to suggest some questions. I'll verify them ASAP if I feel they're suitable questions.
