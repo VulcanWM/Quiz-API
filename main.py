@@ -152,10 +152,8 @@ def verifywaitfunc():
               json.dump(questions, outfile)
             outfile.close()
             return "Accepted question and added it to the questions!"
-      
           else:
             return "Denied question"
-            
     else:
       return "Wrong password!"
 
