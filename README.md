@@ -1,7 +1,7 @@
 # **QUIZ API**
 This is an API made in Python in which you can get random quiz questions really easily. 
 
-The topics in this quiz API are art-literature, general-knowledge, geography, history, music, science-nature, sport, tv-films and all.
+The topics in this quiz API are art-literature, general-knowledge, geography, history, music, science-nature, sport, tv-films, books and all.
 
 The difficulties in this API are 1, 2, 3, 4 and 5
 

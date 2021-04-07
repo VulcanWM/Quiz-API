@@ -8,7 +8,7 @@ f = open('questions.json')
 questions = json.load(f)
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-topics = ["art-literature", "general-knowledge", "geography", "history", "music", "science-nature", "sport", "tv-films", "all"]
+topics = ["art-literature", "general-knowledge", "geography", "history", "music", "science-nature", "sport", "tv-films", "all", "books"]
 
 diffs = ["1", "2", "3", "4", "5"]
 
