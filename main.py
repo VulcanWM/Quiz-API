@@ -14,7 +14,7 @@ diffs = ["1", "2", "3", "4", "5"]
 
 @app.route('/', methods=['GET'])
 def home():
-    return "Quiz API"
+    return "<h1>Quiz API</h1><p>Click <a href='https://github.com/VulcanWM/Quiz-API'>here</a> to see how to use it</p>"
 
 @app.route("/addquestion")
 def addquestion():
